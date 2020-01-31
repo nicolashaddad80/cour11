@@ -24,3 +24,4 @@ public class CounterImp1 extends MyObservvableImp1 implements Counter {
         return this.value;
     }
 }
+

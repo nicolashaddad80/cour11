@@ -9,5 +9,4 @@ public interface Counter extends MyObservable {
     void reset();
 
     int getValue();
-
 }
