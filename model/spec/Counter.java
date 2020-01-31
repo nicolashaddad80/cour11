@@ -1,6 +1,8 @@
 package fr.cnam.cour11.model.spec;
 
-public interface Counter {
+import fr.cnam.mydesignpatterns.observer.MyObservable;
+
+public interface Counter extends MyObservable {
 
     void increment();
 
