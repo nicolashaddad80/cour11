@@ -6,7 +6,7 @@ import fr.cnam.cour11.mydesignpatterns.observer.OptimizedClass;
 
 import javax.swing.*;
 
-public class CounterVue extends JPanel implements OptimizedClass {
+public class PanelView extends JPanel implements OptimizedClass {
 
     /**
      * Attributes
@@ -37,7 +37,7 @@ public class CounterVue extends JPanel implements OptimizedClass {
      *
      * @param a_myModel: A simple counter as a Model for me.
      */
-    public CounterVue(Counter a_myModel) {
+    public PanelView(Counter a_myModel) {
         this.myModel = a_myModel;
         this.myModelObserver = this::updateMyModelValue;
         this.myModel.registerObserver(myModelObserver);

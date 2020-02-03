@@ -2,7 +2,7 @@ package fr.cnam.cour11.presentation;
 
 import fr.cnam.cour11.controllers.PanelController;
 import fr.cnam.cour11.model.spec.Counter;
-import fr.cnam.cour11.vue.CounterVue;
+import fr.cnam.cour11.vue.PanelView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +13,11 @@ public class CounterGuiPresentation {
     private JFrame frame = new JFrame("CounterGuiPresentation");
     /*Create instance of Model*/
     private Counter myModel;
-    private CounterVue myCounterVue;
+    private PanelView myCounterVue;
 
     public CounterGuiPresentation(Counter a_myModel) {
         this.myModel = a_myModel;
-        this.myCounterVue = new CounterVue(myModel);
+        this.myCounterVue = new PanelView(myModel);
         PanelController myController = new PanelController(myModel);
         JButton myExitButton = new JButton("Quitter");
 
