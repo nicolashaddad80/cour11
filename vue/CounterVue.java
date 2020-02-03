@@ -1,14 +1,12 @@
 package fr.cnam.cour11.vue;
 
-
 import fr.cnam.cour11.model.spec.Counter;
-import fr.cnam.mydesignpatterns.observer.MyObserver;
-import fr.cnam.mydesignpatterns.observer.OptimizedClass;
+import fr.cnam.cour11.mydesignpatterns.observer.MyObserver;
+import fr.cnam.cour11.mydesignpatterns.observer.OptimizedClass;
 
 import javax.swing.*;
 
-
-public class CounterVue extends JPanel implements MyObserver, OptimizedClass {
+public class CounterVue extends JPanel implements OptimizedClass {
 
     /**
      * Attributes
@@ -22,6 +20,7 @@ public class CounterVue extends JPanel implements MyObserver, OptimizedClass {
      * My Model is a simple Observable counter that I will Observe by registering me to him
      */
     private Counter myModel;
+    private MyObserver myModelObserver;
 
     /**
      *  Vue Graphical Elements to show My Model data
@@ -40,16 +39,14 @@ public class CounterVue extends JPanel implements MyObserver, OptimizedClass {
      */
     public CounterVue(Counter a_myModel) {
         this.myModel = a_myModel;
-        this.myModel.registerObserver(this);
-        this.displayCounterValue = new JLabel("" + myModel.getValue());
+        this.myModelObserver = this::updateMyModelValue;
+        this.myModel.registerObserver(myModelObserver);
+        this.displayCounterValue = new JLabel();
         this.add(this.displayCounterValue);
+        this.updateMyModelValue();
     }
 
-    /**
-     * Implementing Observer Methods as I am a observer of my Model
-     */
-    @Override
-    public void notifyMe() {
+    private void updateMyModelValue() {
         this.displayCounterValue.setText("" + myModel.getValue());
     }
 
@@ -58,9 +55,10 @@ public class CounterVue extends JPanel implements MyObserver, OptimizedClass {
      * need to unregister me from my Observable Model list
      * This is to allow garbage collector freeing my occupied memory space at my instantiation (creation)
      */
+
     @Override
     public void destroy() {
-        this.myModel.unregisterObserver(this);
+        this.myModel.unregisterObserver(this.myModelObserver);
     }
 }
 

@@ -1,42 +1,63 @@
 package fr.cnam.cour11.tests;
 
 import fr.cnam.cour11.controllers.PanelController;
-import fr.cnam.cour11.model.CounterImp1;
 import fr.cnam.cour11.model.spec.Counter;
 import fr.cnam.cour11.vue.CounterVue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CounterGuiPresentation {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new CounterGuiPresentation().start());
-    }
+    private JFrame frame = new JFrame("CounterGuiPresentation");
 
-    private void start() {
-        /*Create instance of Model*/
-        Counter myModel = new CounterImp1();
+    /*Create instance of Model*/
+    private Counter myModel;
+    private CounterVue myCounterVue;
+    private PanelController myController;
 
-        CounterVue myCounterVue = new CounterVue(myModel);
-        PanelController myController = new PanelController(myModel);
+    private JButton myExitButton = new JButton("Quitter");
 
-        JFrame frame = new JFrame("CounterGuiPresentation");
+    public CounterGuiPresentation(Counter a_myModel) {
+        this.myModel = a_myModel;
+        this.myCounterVue = new CounterVue(myModel);
+        this.myController = new PanelController(myModel);
+        this.myExitButton = new JButton("Quitter");
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Container content = frame.getContentPane();
-
+        Container content = this.frame.getContentPane();
         content.setLayout(new FlowLayout());
-
         /* Adding Vue Panel Part */
-        content.add(myCounterVue);
+        content.add(this.myCounterVue);
         /* Adding controller Panel Part */
-        content.add(myController);
+        content.add(this.myController);
+        this.myExitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myExit();
+            }
+        });
+        /*Adding Exit Button*/
+        content.add(this.myExitButton);
 
-        frame.pack();
-        frame.setVisible(true);
-
-
-        /*Instantiating a Vue*/
-        //new CounterVue(myCounter/*clean, bInc, bRes*/);
     }
+
+    public void start() {
+        this.frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                myExit();
+            }
+        });
+        this.frame.setSize(500, 100);
+        this.frame.setVisible(true);
+    }
+
+    private void myExit() {
+        myCounterVue.destroy();
+        System.out.println("Thank you Using this Application");
+        System.exit(0);
+    }
+
 }
