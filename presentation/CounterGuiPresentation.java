@@ -46,7 +46,7 @@ public class CounterGuiPresentation {
         this.myCounterVue.destroy();
         System.out.println("Thank you Using this Application");
         this.frame.dispose();
-        if(this.myModel.countObservers()==0)
+        if (this.myModel.countObservers() == 0)
             System.exit(0);
     }
 }
