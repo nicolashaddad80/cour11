@@ -8,24 +8,15 @@ import javax.swing.*;
 
 public class PanelView extends JPanel implements OptimizedClass {
 
-    /**
-     * Attributes
-     */
+    /*Attributes*/
 
-    /**
-     * Vue Model
-     */
+    /*Vue Model*/
 
     /**
      * My Model is a simple Observable counter that I will Observe by registering me to him
      */
     private Counter myModel;
     private MyObserver myModelObserver;
-
-    /**
-     *  Vue Graphical Elements to show My Model data
-     */
-
 
     /**
      * My Model is a simple Counter use simple swing label to show it in the screen
@@ -51,7 +42,7 @@ public class PanelView extends JPanel implements OptimizedClass {
     }
 
     /**
-     * Implementing OptimizedClas as my Graphical elements are actualized on my Model notifications
+     * Implementing OptimizedClass as my Graphical elements are actualized on my Model notifications
      * need to unregister me from my Observable Model list
      * This is to allow garbage collector freeing my occupied memory space at my instantiation (creation)
      */
